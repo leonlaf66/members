@@ -1,0 +1,69 @@
+<?php
+use module\estate\helpers\Rets as RetsHelper;
+
+$t = function($message, $params=[]){
+    return \WS::t('wishlist', $message, $params);
+};
+$typeName = \WS::t('rets', $typeName);
+
+$this->title = $t('My Wishlist (for {typeName})', ['typeName'=>$typeName]);
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<h2 class="title"><?php echo $this->title?></h2>
+
+<div class="wishlist-container">
+    <?php if(count($wishlist)==0):?>
+        <?php echo $t('No any wishlist now!')?>
+    <?php else:?>
+        <div id="wishlist-table">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2"><?php echo $t('Item')?></th>
+                    <th><?php echo $t('Price')?></th>
+                    <th><?php echo $t('Status')?></th>
+                    <th><?php echo $t('Wish Time')?></th>
+                    <th><?php echo $t('Action')?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($wishlist as $item):?>
+                    <?php
+                        $url = RetsHelper::getUrl($item->getRets());
+                    ?>
+                    <?php $_rets = $item->getRets();?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo $url?>" target="_blank">
+                                <img style="width:50px;height:50px" src="<?php echo $_rets->getPhoto(0, 50,50)?>">
+                            </a>
+                        </td>
+                        <td><a href="<?php echo $url?>" target="_blank"><?php echo $_rets->location?></a></td>
+                        <td><?php echo $_rets->price?></td>
+                        <td><?php echo $_rets->status?></td>
+                        <td><?php echo date('Y-m-d H:i', strtotime($item->created_at))?></td>
+                        <td><a class="btn-remove" href="/wishlist/remove/?id=<?php echo $item->id?>"><?php echo \WS::t('rets', 'Remove it')?></a></td>
+                    </tr>
+                <?php endforeach?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif?>
+</div>
+<script>
+$('#wishlist-table').delegate('.btn-remove', 'click', function(event) {
+    var $self = $(this),
+        href = $self.attr('href');
+
+    if(confirm('<?php echo \WS::t('@app', 'Are you sure you want to delete it?')?>') == false) {
+        return false;
+    }
+
+    $.get(href, {}, function(){
+        window.location.reload();
+    });
+
+    return false;
+});
+</script>

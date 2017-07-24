@@ -1,0 +1,89 @@
+<?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use common\customer\RetsNewsletter;
+
+$t = \WS::lang('rets-nl');
+?>
+
+<?php
+$this->title = $t('Newsletter Notification', [], true);
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<?php if($model->id):?>
+    <h2 class="title"><?php $t('Modify Newsletter Notification')?></h2>
+<?php else:?>
+    <h2 class="title"><?php $t('Create a Newsletter Notification')?></h2>
+<?php endif?>
+<div class="">
+<?php $form = ActiveForm::begin([
+         'id' => 'rets-newsletter-form', 
+         'layout'=>'horizontal',
+         'fieldConfig' => [
+            'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+            'horizontalCssClasses' => [
+                'label' => 'col-sm-2',
+                'offset' => 'col-sm-offset-2',
+                'wrapper' => 'col-sm-6',
+                'error' => '',
+                'hint' => '',
+            ],
+      ],
+      ])?>
+
+    <?php echo $form->field($model, 'name', ['horizontalCssClasses'=>['wrapper'=>'col-sm-6']])?>
+
+    <?php echo $form->field($model, 'city', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
+        ->dropDownList(RetsNewsletter::cityOptions(), ['prompt'=>'', 'class'=>'form-control ex-select']) ?>
+
+    <?php echo $form->field($model, 'prop_type', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
+        ->dropDownList(RetsNewsletter::typeOptions(), ['prompt'=>'']) ?>
+
+    <?php echo $form->field($model, 'price_range', ['horizontalCssClasses'=>['wrapper' => 'col-sm-8']]) ?>
+
+    <?php echo $form->field($model, 'bed_rooms')
+        ->inline()
+        ->radioList(RetsNewsletter::bedOptions()) ?>
+    
+    <?php echo $form->field($model, 'bath_rooms')
+        ->inline()
+        ->radioList(RetsNewsletter::bathOptions()) ?>
+
+    <?php echo $form->field($model, 'notification_cycle')
+        ->inline()
+        ->radioList(RetsNewsletter::cycleOptions()) ?>
+
+    <div class="container-fluid">
+        <div class="row">
+            <button type="submit" class="btn"><?php $t('Submit')?></button>
+            &nbsp;&nbsp;
+            <a href="/umember/rets-newsletter/" class="btn"><?php $t('Cancel')?></a>
+        </div>
+    </div>
+<?php ActiveForm::end()?>
+</div>
+
+<style>
+.form-horizontal .control-label{text-align:left;}
+.form-horizontal .form-group{margin-left:0;margin-right:0;}
+.price-range-input{display:inline-block;width:85px;}
+</style>
+<script>
+(function($){
+    var $priceRange = $('#retsnewsletter-price_range');
+    var prices = $priceRange.val().split('-');
+    if(prices.length < 2) prices.push('');
+    var $inputs = '$ <input id="price-range-begin" class="form-control price-range-input" value="'+prices[0]+'"/>' +
+                  ' - '+
+                  '$ <input id="price-range-end" class="form-control price-range-input" value="'+prices[1]+'"/>'
+
+    $priceRange.after($inputs);
+    $priceRange.hide();
+    $('.field-retsnewsletter-price_range').delegate('.price-range-input', 'change', function(event) {
+        var result = $('#price-range-begin').val()+'-'+$('#price-range-end').val();
+        $priceRange.val(result);
+    });
+})(jQuery);
+
+</script>
