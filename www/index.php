@@ -8,6 +8,7 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 
 // define  root paths
 defined('APP_ROOT') OR define('APP_ROOT', dirname(__DIR__));
+defined('COMMON') OR define('COMMON', dirname(APP_ROOT).'/fdn');
 
 ini_set('memory_limit', '1024M');
 

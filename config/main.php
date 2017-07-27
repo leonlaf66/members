@@ -95,6 +95,7 @@ return \yii\helpers\ArrayHelper::merge(get_fdn_etc(), [
     ],
     'aliases'=>[
         '@bower'=>APP_ROOT.'/vendor/bower',
-        'module'=>APP_ROOT.'/app'
+        'module'=>APP_ROOT.'/app',
+        '@COMMON'=>COMMON
     ]
 ], $localConfig);
