@@ -30,7 +30,7 @@ class ScheduleController extends \module\umember\Controller
     {
         $id = intval($id);
         $userId = WS::$app->user->id;
-        if($tour = \common\rets\gotour\Tour::findOneByUser($id, $userId)) {
+        if($tour = \common\estate\gotour\Tour::findOneByUser($id, $userId)) {
             if($tour->delete()) {
                 WS::$app->session->setFlash('success', 'The schedule has been deleted!');
             }
