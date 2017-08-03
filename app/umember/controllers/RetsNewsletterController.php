@@ -28,7 +28,6 @@ class RetsNewsletterController extends \module\umember\Controller
 
     public function actionUpdate($id)
     {
-        var_dump("RetsNewsletterController:update");exit;
         return $this->actionEdit($id);
     }
 
@@ -50,7 +49,7 @@ class RetsNewsletterController extends \module\umember\Controller
             $model->user_id = WS::$app->user->id;
             if($model->validate()) {
                 if($model->save()) {
-                    $successMessage = 'Your Newsletter has been '.(is_null($id) ? 'modified' : 'created').'!';
+                    $successMessage = tt('Your Newsletter has been '.(is_null($id) ? 'created' : 'modified').'!', '你的订阅已经'.(is_null($id) ? '创建' : '修改').'完成!');
                     WS::$app->session->setFlash('success', $successMessage);
                     
                     return $this->redirect(['/umember/rets-newsletter/']);
