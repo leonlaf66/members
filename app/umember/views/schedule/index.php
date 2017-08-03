@@ -2,10 +2,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use module\estate\helpers\Rets as RetsHelper;
-
-$t = \WS::lang('tour');
   
-$this->title = $t('My Schedule', [], true);  
+$this->title = tt('My Schedule', '我的预约');  
 $this->params['breadcrumbs'][] = $this->title;  
 ?>
 
@@ -19,7 +17,7 @@ echo yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,
     'columns'=>[
         'item_image'=>[
-            'header'=>$t('Item', [], true),
+            'header'=>tt('Item', '项目'),
             'value'=>function($m){
                 if($rets = $m->getRets()) {
                     $imgSrc = $rets->getPhoto(0, 60, 50) . '';
@@ -68,9 +66,9 @@ echo yii\grid\GridView::widget([
         ],
         [
            'class' => 'yii\grid\ActionColumn',
-           'header' => $t('Action', [], true), 
+           'header' => tt('Action', '操作'), 
            'template' => '{delete}',
-           'headerOptions' => ['width' => '20'],
+           'headerOptions' => ['width' => '50px'],
            'contentOptions'=>[
                 'align'=>'center'
            ]

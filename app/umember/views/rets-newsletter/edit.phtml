@@ -7,14 +7,14 @@ $t = \WS::lang('rets-nl');
 ?>
 
 <?php
-$this->title = $t('Newsletter Notification', [], true);
+$this->title = tt('Newsletter Notification', '订阅通知');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php if($model->id):?>
-    <h2 class="title"><?php $t('Modify Newsletter Notification')?></h2>
+    <h2 class="title"><?php _tt('Modify Newsletter Notification', '修改订阅通知')?></h2>
 <?php else:?>
-    <h2 class="title"><?php $t('Create a Newsletter Notification')?></h2>
+    <h2 class="title"><?php _tt('Create a Newsletter Notification', '创建订阅通知')?></h2>
 <?php endif?>
 <div class="">
 <?php $form = ActiveForm::begin([
@@ -56,9 +56,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="container-fluid">
         <div class="row">
-            <button type="submit" class="btn"><?php $t('Submit')?></button>
+            <button type="submit" class="btn"><?php _tt('Submit', '提交')?></button>
             &nbsp;&nbsp;
-            <a href="/umember/rets-newsletter/" class="btn"><?php $t('Cancel')?></a>
+            <a href="/umember/rets-newsletter/" class="btn"><?php _tt('Cancel', '取消')?></a>
         </div>
     </div>
 <?php ActiveForm::end()?>

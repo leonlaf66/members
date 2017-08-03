@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $t = \WS::lang('account');
-$this->title = $t("My account", [], true);
+$this->title = tt("My account", '我的帐户');
 ?>
 
 <?php
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="alert alert-success"><?php $t('Password modification has been completed!')?></div>
 <?php endif?>
 
-<div class="">
+<div>
     <?php $form = ActiveForm::begin(['id' => 'modify-password-form'])?>
 
         <div class="form-group">

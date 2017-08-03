@@ -3,16 +3,12 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use common\customer\RetsNewsletter;
 
-$t = function($message, $params=[]){
-    return \WS::t('rets-nl', $message, $params);
-};
-  
-$this->title = $t('Newsletter Notification');  
+$this->title = tt('Newsletter Notification', '订阅通知');  
 $this->params['breadcrumbs'][] = $this->title;  
 ?>
 
 <h2 class="title"><?php echo $this->title?>
-    <a href="edit/" class="btn" style="float:right"><?php echo $t('New')?></a>
+    <a href="edit/" class="btn" style="float:right"><?php echo tt('New', '创建')?></a>
 </h2>
 
 <?php
@@ -39,7 +35,7 @@ echo yii\grid\GridView::widget([
             ]
         ],
         'info'=>[
-            'header'=>\WS::t('rets-nl', 'Info'),
+            'header'=>tt('Info', '内容'),
             'value'=>function($m) {
                 $dataItems = $m->getDataItems();
                 $output = [];
@@ -59,9 +55,9 @@ echo yii\grid\GridView::widget([
         ],
         [
            'class' => '\yii\grid\ActionColumn',
-           'header' => \WS::t('rets-nl', 'Action'), 
+           'header' => tt('Action', '操作'), 
            'template' => '{update}{delete}',
-           'headerOptions' => ['width' => '20'],
+           'headerOptions' => ['width' => '50'],
            'contentOptions'=>[
                 'align'=>'center'
            ]
