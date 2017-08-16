@@ -5,6 +5,8 @@ use WS;
 
 class Controller extends \module\core\Controller
 {
+    public $menuId = null;
+
     public function beforeAction($action)
     {
         if(WS::$app->user->isGuest) {
@@ -15,7 +17,7 @@ class Controller extends \module\core\Controller
             $userId = WS::$app->user->id;
             $profile = \common\customer\Profile::findOne($userId);
             if(!$profile || !$profile->phone_number) {
-                return $this->redirect(['/umember/profile/', 'prompt'=>1]);
+                return $this->redirect(['/profile/', 'prompt'=>1]);
             }
         }
 

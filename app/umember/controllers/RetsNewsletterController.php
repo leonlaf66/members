@@ -6,8 +6,10 @@ use yii\data\ActiveDataProvider;
 
 class RetsNewsletterController extends \module\umember\Controller
 {
-    public function actionIndex($type=1)
+    public function actionIndex()
     {
+        $this->menuId = 'newsletter';
+
         $query = \common\customer\RetsNewsletter::find()->where(['user_id'=>WS::$app->user->id]);
 
         $dataProvider = new ActiveDataProvider([  
@@ -33,6 +35,8 @@ class RetsNewsletterController extends \module\umember\Controller
 
     public function actionEdit($id=null)
     {
+        $this->menuId = 'newsletter';
+        
         $model = null;
         if(! is_null($id)) {
             $model = \common\customer\RetsNewsletter::find()
@@ -68,7 +72,7 @@ class RetsNewsletterController extends \module\umember\Controller
                 'user_id'=>WS::$app->user->id
             ])->one();
             
-        if($model->id) {
+        if($model && $model->id) {
             $model->delete();
         }
         return $this->redirect(['/umember/rets-newsletter/']);

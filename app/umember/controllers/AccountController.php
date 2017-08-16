@@ -5,8 +5,10 @@ use WS;
 
 class AccountController extends \module\umember\Controller
 {
-    public function actionIndex()
+    public function actionModifyPassword()
     {
+        $this->menuId = 'modify-password';
+
         $form = new \common\customer\account\ModifyPasswordForm();
         $form->user_id = WS::$app->user->id;
 
@@ -19,6 +21,13 @@ class AccountController extends \module\umember\Controller
             }
         }
 
-        return $this->render('index', ['modifyPasswordForm'=>$form]);
+        return $this->render('modify-password', ['modifyPasswordForm'=>$form]);
+    }
+
+    public function actionBindPhone()
+    {
+        $this->menuId = 'bind-phone';
+
+        return $this->render('bind-phone');
     }
 }

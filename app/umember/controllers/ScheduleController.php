@@ -8,6 +8,8 @@ class ScheduleController extends \module\umember\Controller
 {
     public function actionIndex()
     {
+        $this->menuId = 'schedule';
+        
         $query = \common\estate\gotour\Tour::find()->where(['user_id'=>WS::$app->user->id]);
 
         $dataProvider = new ActiveDataProvider([  

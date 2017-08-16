@@ -2,7 +2,6 @@
 return [
     'urlRules'=>[
         '/'=>'umember/default/index',
-        '/myaccount/' => 'umember/account/index',
         '/profile/' => 'umember/profile/index',
         '/rets/newsletter/' => 'umember/rets-newsletter/index',
         '/rets/newsletter/update' => 'umember/rets-newsletter/update',
@@ -12,5 +11,7 @@ return [
         '/rets/schedule/delete' => 'umember/schedule/delete',
         '/rets/wishlist/' => 'umember/wishlist/index',
         '/rets/wishlist/delete' => 'umember/wishlist/remove',
+        '/modify-password/' => 'umember/account/modify-password',
+        '/bind-phone/' => 'umember/account/bind-phone',
     ]
 ];

@@ -4,6 +4,10 @@ $this->registerJsFile('https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.
 $this->registerCssFile('http://v3.bootcss.com/dist/css/bootstrap.min.css'); 
 
 $t = \WS::lang('ucenter');
+$c = $this->context;
+$active = function($id) use ($c){
+    echo $c->menuId === $id ? 'class="active"' : '';
+};
 ?>
 
 <?php echo \module\page\widgets\Nav::widget()?>
@@ -16,18 +20,38 @@ $t = \WS::lang('ucenter');
     </div>
 </div>
 
+<style type="text/css">
+.sideleft>ul>li.active >a {
+    color:#99bd2a;
+}
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <div class="sideleft">
                 <h3><?php $t('Navigation Menus')?></h3>
                 <ul>
-                    <li><a href="/umember/profile/"><?php $t('Profile')?></a></li>
-                    <li><a href="/umember/wishlist/"><?php $t('Wishlist(for Rental)')?></a></li>
-                    <li><a href="/umember/wishlist/?type=2"><?php $t('Wishlist(for Sell)')?></a></li>
-                    <li><a href="/umember/rets-newsletter/"><?php $t('Newsletter Notification')?></a></li>
-                    <li><a href="/umember/schedule/"><?php $t('Schedule')?></a></li>
-                    <li><a href="/umember/account/"><?php $t('Account')?></a></li>
+                    <li <?php $active('profile')?>>
+                        <a href="/profile/"><?php $t('Profile')?></a>
+                    </li>
+                    <li <?php $active('wishlist-rental')?>>
+                        <a href="/rets/wishlist/"><?php $t('Wishlist(for Rental)')?></a>
+                    </li>
+                    <li <?php $active('wishlist-sell')?>>
+                        <a href="/rets/wishlist/?type=2"><?php $t('Wishlist(for Sell)')?></a>
+                    </li>
+                    <li <?php $active('newsletter')?>>
+                        <a href="/rets/newsletter/"><?php $t('Newsletter Notification')?></a>
+                    </li>
+                    <li <?php $active('schedule')?>>
+                        <a href="/rets/schedule/"><?php $t('Schedule')?></a>
+                    </li>
+                    <li <?php $active('modify-password')?>>
+                        <a href="/modify-password/"><?php _tt('Modify Password', '修改密码')?></a>
+                    </li>
+                    <li <?php $active('bind-phone')?>>
+                        <a href="/bind-phone/"><?php _tt('Bind Phone Number', '绑定手机')?></a>
+                    </li>
                 </ul>
             </div>
         </div>

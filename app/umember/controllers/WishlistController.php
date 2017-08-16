@@ -5,8 +5,10 @@ use WS;
 
 class WishlistController extends \module\umember\Controller
 {
-    public function actionIndex($type=1)
+    public function actionIndex($type='1')
     {
+        $this->menuId = $type === '1' ? 'wishlist-rental' : 'wishlist-sell';
+
         $wishlistQuery = \common\customer\RetsFavorite::findByUserId(WS::$app->user->id);
         if($type == 1) {
             $wishlistQuery->andWhere(['property_type'=>'RN']);

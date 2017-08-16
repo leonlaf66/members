@@ -7,6 +7,8 @@ class ProfileController extends \module\umember\Controller
 {
     public function actionIndex($prompt=null, $callback=null)
     {
+        $this->menuId = 'profile';
+
         $userId = WS::$app->user->id;
         $profile = \common\customer\Profile::findOne($userId);
         if(! $profile) {
