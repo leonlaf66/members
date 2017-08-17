@@ -1,3 +1,7 @@
+.modal-backdrop {
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
 .el-dialog__wrapper {
     position: fixed;
     left: 0;
@@ -31,4 +35,19 @@
         color: #475669;
         font-size: 14px;
     }
+}
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: unset;
+    background-clip: border-box;
+    border: 0;
+    border-radius: 1px;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.modal-dialog {
+    top:50%;
+    margin-top:-140px;
 }

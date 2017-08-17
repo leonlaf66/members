@@ -31,8 +31,11 @@ $active = function($id) use ($c){
             <div class="sideleft">
                 <h3><?php $t('Navigation Menus')?></h3>
                 <ul>
+                    <li <?php $active('account')?>>
+                        <a href="/account/"><?php _tt('My Account', '帐户设置')?></a>
+                    </li>
                     <li <?php $active('profile')?>>
-                        <a href="/profile/"><?php $t('Profile')?></a>
+                        <a href="/profile/"><?php _tt('Profile', '个人资料')?></a>
                     </li>
                     <li <?php $active('wishlist-rental')?>>
                         <a href="/rets/wishlist/"><?php $t('Wishlist(for Rental)')?></a>
@@ -46,12 +49,13 @@ $active = function($id) use ($c){
                     <li <?php $active('schedule')?>>
                         <a href="/rets/schedule/"><?php $t('Schedule')?></a>
                     </li>
+                    <!--
                     <li <?php $active('modify-password')?>>
                         <a href="/modify-password/"><?php _tt('Modify Password', '修改密码')?></a>
                     </li>
                     <li <?php $active('bind-phone')?>>
                         <a href="/bind-phone/"><?php _tt('Bind Phone Number', '绑定手机')?></a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>

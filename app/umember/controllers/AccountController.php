@@ -5,10 +5,20 @@ use WS;
 
 class AccountController extends \module\umember\Controller
 {
+    public function actionIndex()
+    {
+        $this->menuId = 'account';
+
+        $account = \common\customer\Account::findOne(\WS::$app->user->id);
+
+        return $this->render('index', [
+            'account' => $account
+        ]);
+    }
     public function actionModifyPassword()
     {
-        $this->menuId = 'modify-password';
-
+        $this->menuId = 'account';
+        
         $form = new \common\customer\account\ModifyPasswordForm();
         $form->user_id = WS::$app->user->id;
 

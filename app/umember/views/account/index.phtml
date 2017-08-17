@@ -1,0 +1,87 @@
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$t = \WS::lang('account');
+$this->title = tt("My account", '帐户设置');
+
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<h2 class="title"><?php echo $this->title?></h2>
+
+<style type="text/css">
+.account-sets {}
+.account-sets > li{margin-bottom:15px;padding:10px 15px;font-size:0;border-bottom:dashed 1px #efefef;}
+.account-sets > li > label {width:30%;display:inline-block;font-size:15px;vertical-align:top;color:#444;font-weight:200;}
+.account-sets > li > label > .iconfont {margin-right:7px;font-size:22px;color:#444;font-weight:200;}
+.account-sets > li > .cc {width:70%;display:inline-block;font-size:15px;vertical-align:top;}
+.account-sets .fd{position:relative;padding-bottom:15px;}
+.account-sets .fd .c{}
+.account-sets .fd .ft{position:absolute;top:0;right:0;color:#99bd2a;cursor:pointer;}
+</style>
+
+<ul class="account-sets">
+    <li>
+        <label><i class="iconfont icon-user"></i>用户名</label>
+        <div class="cc">
+            <div class="fd">
+                <div class="c"><?php echo $account->username?></div>
+                <a class="ft"></a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <label><i class="iconfont icon-email1"></i>邮箱地址</label>
+        <div class="cc">
+            <div class="fd">
+                <div class="c"><?php echo $account->email?></div>
+                <a class="ft"><!--修改--></a>
+            </div>
+        </div>
+    </li>
+    <!--
+    <li>
+        <label><i class="iconfont icon-phone1"></i>手机关联</label>
+        <div class="cc">
+            <div class="fd">
+                <div class="c"><?php echo $account->phone_number?></div>
+                <a class="ft">修改</a>
+            </div>
+        </div>
+    </li>-->
+    <li>
+        <label><i class="iconfont icon-password"></i>密码设置</label>
+        <div class="cc">
+            <div class="fd">
+                <div class="c">*************</div>
+                <a class="ft" href="/modify-password/">修改</a>
+            </div>
+        </div>
+    </li>
+    <li>
+        <label><i class="iconfont icon-link"></i>帐户绑定</label>
+        <div class="cc">
+            <div class="fd">
+                <div class="c"><i class="iconfont icon-weibo" style="font-size:20px;color:#ea716e"></i> 微博</div>
+                <div class="ft">绑定</div>
+            </div>
+            <div class="fd">
+                <div class="c"><i class="iconfont icon-wechat" style="font-size:20px;color:#98c01b"></i> 微信</div>
+                <div class="ft">绑定</div>
+            </div>
+            <div class="fd">
+                <div class="c"><i class="iconfont icon-facebook" style="font-size:20px;color:#6782b8"></i> Facebook</div>
+                <div class="ft">绑定</div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<!-- Modal -->
+<!--
+<div class="modal" id="dialog-modify-password" tabindex="-1" role="dialog">
+  <div class="modal-dialog" style="width:400px">
+    <div class="modal-content"></div>
+  </div>
+</div>-->

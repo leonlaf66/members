@@ -11,9 +11,11 @@
         color:#fff;
     }
     &:focus {
-        outline:none;
+        color:#fff;
+        outline:none !important;
     }
     &:active {
+        color:#fff;
         background:darken(#99bd2a, 8);
     }
     &.sm {

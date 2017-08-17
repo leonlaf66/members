@@ -2,6 +2,7 @@
 return [
     'urlRules'=>[
         '/'=>'umember/default/index',
+        '/account/'=>'umember/account/index',
         '/profile/' => 'umember/profile/index',
         '/rets/newsletter/' => 'umember/rets-newsletter/index',
         '/rets/newsletter/update' => 'umember/rets-newsletter/update',
