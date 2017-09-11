@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php
                         $url = RetsHelper::getUrl($item->getRets());
                     ?>
-                    <?php $_rets = $item->getRets();?>
+                    <?php
+                        $_rets = $item->getRets();
+                        $_render = $_rets->render();
+                    ?>
                     <tr>
                         <td>
                             <a href="<?php echo $url?>" target="_blank">
@@ -40,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </a>
                         </td>
                         <td><a href="<?php echo $url?>" target="_blank"><?php echo $_rets->title()?></a></td>
-                        <td><?php echo $_rets->list_price?></td>
+                        <td><?php echo $_render->get('list_price')['formatedValue']?></td>
                         <td><?php echo $_rets->statusName()?></td>
                         <td><?php echo date('Y-m-d H:i', strtotime($item->created_at))?></td>
                         <td><a class="btn-remove" href="/rets/wishlist/delete/?id=<?php echo $item->id?>"><?php echo \WS::t('rets', 'Remove it')?></a></td>

@@ -48,10 +48,12 @@ echo yii\grid\GridView::widget([
         ],
         'created_at'=>[
             'attribute'=>'created_at',
-            'format'=>'date',
             'headerOptions'=>[
                 'width'=>'120px'
-            ]
+            ],
+            'value'=>function($m) {
+                return date('Y-m-d H:00', strtotime($m->created_at));
+            }
         ],
         [
            'class' => '\yii\grid\ActionColumn',

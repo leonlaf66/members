@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <ul class="account-sets">
     <li>
-        <label><i class="iconfont icon-user"></i>用户名</label>
+        <label><i class="iconfont icon-user"></i><?php _tt('Username', '用户名')?></label>
         <div class="cc">
             <div class="fd">
                 <div class="c"><?php echo $account->username?></div>
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </li>
     <li>
-        <label><i class="iconfont icon-email1"></i>邮箱地址</label>
+        <label><i class="iconfont icon-email1"></i><?php _tt('Email address', '邮箱地址')?></label>
         <div class="cc">
             <div class="fd">
                 <div class="c"><?php echo $account->email?></div>
@@ -51,28 +51,28 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </li>-->
     <li>
-        <label><i class="iconfont icon-password"></i>密码设置</label>
+        <label><i class="iconfont icon-password"></i><?php _tt('Password', '密码设置')?></label>
         <div class="cc">
             <div class="fd">
                 <div class="c">*************</div>
-                <a class="ft" href="/modify-password/">修改</a>
+                <a class="ft" href="/modify-password/"><?php _tt('Modify', '修改')?></a>
             </div>
         </div>
     </li>
     <li>
-        <label><i class="iconfont icon-link"></i>帐户绑定</label>
+        <label><i class="iconfont icon-link"></i><?php _tt('Binds', '帐户绑定')?></label>
         <div class="cc">
             <div class="fd">
-                <div class="c"><i class="iconfont icon-weibo" style="font-size:20px;color:#ea716e"></i> 微博</div>
-                <div class="ft">绑定</div>
+                <div class="c"><i class="iconfont icon-weibo" style="font-size:20px;color:#ea716e"></i> <?php _tt('Weibo', '微博')?></div>
+                <div class="ft"><?php _tt('Bind', '绑定')?></div>
             </div>
             <div class="fd">
-                <div class="c"><i class="iconfont icon-wechat" style="font-size:20px;color:#98c01b"></i> 微信</div>
-                <div class="ft">绑定</div>
+                <div class="c"><i class="iconfont icon-wechat" style="font-size:20px;color:#98c01b"></i> <?php _tt('WeChat', '微信')?></div>
+                <div class="ft"><?php _tt('Bind', '绑定')?></div>
             </div>
             <div class="fd">
                 <div class="c"><i class="iconfont icon-facebook" style="font-size:20px;color:#6782b8"></i> Facebook</div>
-                <div class="ft">绑定</div>
+                <div class="ft"><?php _tt('Bind', '绑定')?></div>
             </div>
         </div>
     </li>
