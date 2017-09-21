@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="wishlist-container">
     <?php if(count($wishlist)==0):?>
-        <?php echo $t('No any wishlist now!')?>
+        <?php _tt('No any wishlist now!', '目前还没有任何收藏...')?>
     <?php else:?>
         <div id="wishlist-table">
             <table class="table table-hover">
