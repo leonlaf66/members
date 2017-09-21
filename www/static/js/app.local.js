@@ -1,3 +1,7 @@
+function tt(en, cn) {
+    return document.getElementById('language').getAttribute('content') === 'en-US' ? en : cn;
+}
+
 /*! 版权所有，Wesnail */
 window.location.changeParam=function(a,b){var c=new RegExp("(\\?|\\&)("+a+"=).*?(&|$)"),d=this.href,e=this.href;e=d.search(c)>=0?d.replace(c,"$1$2"+b+"$3"):e+(e.indexOf("?")>0?"&":"?")+a+"="+b,this.href=e},String.prototype.getWidth=function(a){var b=calculateSize(this,{font:"Arial",fontSize:a+"px"});return b.width};
 

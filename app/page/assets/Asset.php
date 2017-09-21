@@ -21,7 +21,8 @@ class Asset extends AssetBundle
         '/static/css/main.css?v2'
     ];
     public $js = [
-        '/static/lib/jquery.min.js'
+        'static/lib/jquery.min.js',
+        'static/js/app.local.js'
     ];
     public $depends = [
         

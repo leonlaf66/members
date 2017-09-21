@@ -14,5 +14,8 @@ return [
         '/rets/wishlist/delete' => 'umember/wishlist/remove',
         '/modify-password/' => 'umember/account/modify-password',
         '/bind-phone/' => 'umember/account/bind-phone',
+        '/bind-wechat/' => 'umember/account/bind-wechat',
+        '/unbind-wechat/' => 'umember/account/unbind-wechat',
+        '/bind-email-address' => 'umember/account/bind-email-address'
     ]
 ];

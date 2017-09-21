@@ -4,7 +4,6 @@ use yii\widgets\ActiveForm;
 
 $t = \WS::lang('account');
 $this->title = tt("My account", '帐户设置');
-
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -13,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <style type="text/css">
 .account-sets {}
 .account-sets > li{margin-bottom:15px;padding:10px 15px;font-size:0;border-bottom:dashed 1px #efefef;}
-.account-sets > li > label {width:30%;display:inline-block;font-size:15px;vertical-align:top;color:#444;font-weight:200;}
+.account-sets > li > label {width:30%;display:inline-block;font-size:15px;vertical-align:top;color:#444;font-weight:200;margin-top:-5px;}
 .account-sets > li > label > .iconfont {margin-right:7px;font-size:22px;color:#444;font-weight:200;}
 .account-sets > li > .cc {width:70%;display:inline-block;font-size:15px;vertical-align:top;}
 .account-sets .fd{position:relative;padding-bottom:15px;}
@@ -26,8 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <label><i class="iconfont icon-email1"></i><?php _tt('Email address', '邮箱地址')?></label>
         <div class="cc">
             <div class="fd">
-                <div class="c"><?php echo $account->email?></div>
-                <a class="ft"><!--修改--></a>
+                <?php if ($account->email):?>
+                    <div class="c"><?php echo $account->email?></div>
+                <?php else:?>
+                    <div class="c"><?php _tt('Not set', '未设定')?></div>
+                <?php endif?>
+                <?php if (!$account->email):?>
+                    <a id="btn-email-address" href="javascript:void(0)" class="ft"><?php _tt('Bind', '绑定')?></a>
+                <?php endif?>
             </div>
         </div>
     </li>
@@ -54,25 +59,49 @@ $this->params['breadcrumbs'][] = $this->title;
         <label><i class="iconfont icon-link"></i><?php _tt('Binds', '帐户绑定')?></label>
         <div class="cc">
             <div class="fd">
-                <div class="c"><i class="iconfont icon-weibo" style="font-size:20px;color:#ea716e"></i> <?php _tt('Weibo', '微博')?></div>
-                <div class="ft"><?php _tt('Bind', '绑定')?></div>
-            </div>
-            <div class="fd">
                 <div class="c"><i class="iconfont icon-wechat" style="font-size:20px;color:#98c01b"></i> <?php _tt('WeChat', '微信')?></div>
-                <div class="ft"><?php _tt('Bind', '绑定')?></div>
-            </div>
-            <div class="fd">
-                <div class="c"><i class="iconfont icon-facebook" style="font-size:20px;color:#6782b8"></i> Facebook</div>
-                <div class="ft"><?php _tt('Bind', '绑定')?></div>
+                <?php if ($account->open_id):?>
+                    <a href="/unbind-wechat/" class="ft"><?php _tt('Unbind', '解除')?></a>
+                <?php else:?>
+                    <a id="btn-bind-wechat" class="ft"><?php _tt('Bind', '绑定')?></a>
+                <?php endif?>
             </div>
         </div>
     </li>
 </ul>
 
-<!-- Modal -->
-<!--
-<div class="modal" id="dialog-modify-password" tabindex="-1" role="dialog">
-  <div class="modal-dialog" style="width:400px">
-    <div class="modal-content"></div>
-  </div>
-</div>-->
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<script type="text/javascript">
+<?php
+    $app = \Yii::$app;
+?>
+$('#btn-bind-wechat').click(function () {
+    var obj = new WxLogin({
+      id:"login_container", 
+      appid: "<?php echo $app->params['wechat']['appId']?>",
+      scope: "snsapi_login",
+      redirect_uri: "<?php echo $app->request->hostInfo?>/bind-wechat/",
+      state: "<?php echo $app->request->csrfToken?>",
+      style: "white",
+      // href: "" /*样式定制*/
+    });
+});
+$('#btn-email-address').click(function () {
+    var email = window.prompt(tt('Please enter email address.', '请输入邮件地址.'));
+    if ($.trim(email) !== '') {
+        if (!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(email)) {
+            window.alert(tt('Error email address!', '错误的邮箱地址输入.'));
+            return;
+        }
+
+        var data = {
+            email: email,
+            _csrf: document.getElementById('csrf-token').content
+        }
+
+        $.post('/bind-email-address/', data, function (res) {
+            console.log(res);
+        });
+    }
+});
+</script>

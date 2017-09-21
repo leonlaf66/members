@@ -16,6 +16,7 @@ module\page\assets\Asset::register($this);
     <link rel="bookmark" href="/favicon.ico" type="image/x-icon"　/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <meta id="language" content="<?php echo Yii::$app->language?>">
     <link rel="stylesheet" type="text/css" href="<?php echo \WS::$app->params['iconfontUrl']?>">
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_ord7zdw8aefdpldi.css">
     <meta id="csrf-token" content="<?php echo Yii::$app->request->csrfToken?>">
