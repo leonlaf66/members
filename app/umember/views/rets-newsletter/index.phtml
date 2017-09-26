@@ -11,6 +11,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <a href="edit/" class="btn" style="float:right"><?php echo tt('New', '创建')?></a>
 </h2>
 
+<style type="text/css">
+.filters .cell-label{
+    color:#666;
+    padding-left:5px;
+    padding-right:10px;
+    text-align:right;
+    background-color:#f2f2f2;
+    border-bottom:solid 3px #fff;
+}
+.filters .cell-label:after{
+    content:':';
+}
+.filters .cell-value{
+    padding-left:8px;
+}
+</style>
+
 <?php
 $typeOptions = RetsNewsletter::typeOptions();
 echo yii\grid\GridView::widget([
@@ -19,37 +36,32 @@ echo yii\grid\GridView::widget([
     'tableOptions'=>['class'=>'table'],
     'dataProvider' => $dataProvider,
     'columns'=>[
-        'prop_type'=>[
-            'attribute'=>'prop_type',
-            'value'=>function($m) use($typeOptions){
-                return isset($typeOptions[$m->prop_type]) ? $typeOptions[$m->prop_type] : null;
-            },
-            'headerOptions'=>[
-                'width'=>'80px'
-            ]
-        ],
         'name'=>[
             'attribute'=>'name',
             'headerOptions'=>[
-                'width'=>'120px'
+                'width'=>'170px'
             ]
         ],
         'info'=>[
             'header'=>tt('Info', '内容'),
             'value'=>function($m) {
                 $dataItems = $m->getDataItems();
-                $output = [];
+                $output = ['<table class="filters">'];
                 foreach ($dataItems as $label => $value) {
-                    $output[] = "<span class=\"label label-default\"><i>{$label}</i>:{$value}</span>";
+                    $output[] = '<tr>';
+                    $output[] = "<td class=\"cell-label\">{$label}</td>";
+                    $output[] = "<td class=\"cell-value\">{$value}</td>";
+                    $output[] = '</tr>';
                 }
-                return implode('&nbsp;', $output);
+                $output[] = '</table>';
+                return implode('', $output);
             },
             'format'=>'html'
         ],
         'created_at'=>[
             'attribute'=>'created_at',
             'headerOptions'=>[
-                'width'=>'120px'
+                'width'=>'140px'
             ],
             'value'=>function($m) {
                 return date('Y-m-d H:00', strtotime($m->created_at));
@@ -58,7 +70,7 @@ echo yii\grid\GridView::widget([
         [
            'class' => '\yii\grid\ActionColumn',
            'header' => tt('Action', '操作'), 
-           'template' => '{update}{delete}',
+           'template' => '{update}&nbsp;{delete}',
            'headerOptions' => ['width' => '50'],
            'contentOptions'=>[
                 'align'=>'center'
@@ -66,3 +78,4 @@ echo yii\grid\GridView::widget([
         ],
     ]
 ]);
+?>
