@@ -10,7 +10,7 @@ class RetsFavoriteController extends \yii\web\Controller
         $result = -1;
 
         if (! WS::$app->user->isGuest) {
-            $result = \common\customer\RetsFavorite::add(WS::$app->request->get('list_no', 0), WS::$app->user->id);    
+            $result = \models\MemberHouseFavority::add(WS::$app->request->get('list_no', 0), WS::$app->user->id);    
         }
 
         echo json_encode($result);
