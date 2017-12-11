@@ -19,11 +19,19 @@ echo yii\grid\GridView::widget([
         'item_image'=>[
             'header'=>tt('Item', '项目'),
             'value'=>function($m){
-                if($rets = $m->getRets()) {
-                    $imgSrc = $rets->getPhoto(0, 60, 50) . '';
+                if ($m->area_id === 'ma') {
+                    if($rets = $m->getRets()) {
+                        $imgSrc = $rets->getPhoto(0, 60, 50) . '';
+                        $linkUrl  = RetsHelper::getUrl($rets);
+                        return "<a href=\"{$linkUrl}\" target=\"_blank\"><img src=\"{$imgSrc}\" style=\"width:60px;height:50px;\"/></a>";
+                    }
+                } else {
+                    $rets = \common\listhub\estate\House::findOne($m->list_no);
+                    $imgSrc = $rets->getPhoto(0)['url'];
                     $linkUrl  = RetsHelper::getUrl($rets);
                     return "<a href=\"{$linkUrl}\" target=\"_blank\"><img src=\"{$imgSrc}\" style=\"width:60px;height:50px;\"/></a>";
                 }
+
                 return '';
             },
             'headerOptions'=>[
@@ -33,11 +41,20 @@ echo yii\grid\GridView::widget([
         ],
         'item_name'=>[
             'value'=>function($m){
-                if($rets = $m->getRets()) {
+                if ($m->area_id === 'ma') {
+                    if($rets = $m->getRets()) {
+                        $linkUrl = RetsHelper::getUrl($rets);
+                        $name = $m->getRetsName();
+                        return "<a href=\"{$linkUrl}\" target=\"_blank\">{$name}</a>";
+                    }
+                } else {
+                    $rets = \common\listhub\estate\House::findOne($m->list_no);
                     $linkUrl = RetsHelper::getUrl($rets);
-                    $name = $m->getRetsName();
+                    $name = $rets->title();
                     return "<a href=\"{$linkUrl}\" target=\"_blank\">{$name}</a>";
+                    return '';
                 }
+
                 return '';
             },
             'headerOptions'=>[

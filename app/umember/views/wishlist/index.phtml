@@ -30,21 +30,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 <tbody>
                 <?php foreach($wishlist as $item):?>
                     <?php
-                        $url = RetsHelper::getUrl($item->getRets());
-                    ?>
-                    <?php
-                        $_rets = $item->getRets();
-                        $_render = $_rets->render();
+                        $domain = domain();
+                        $url = '';
+                        if ($domain === 'ma') {
+                            $url = RetsHelper::getUrl($item->getRets());
+                        } else {
+                            $rets = \common\listhub\estate\House::findOne($item->list_no);
+                            if (!$rets) continue;
+                            $url = RetsHelper::getUrl($rets);
+                        }
                     ?>
                     <tr>
                         <td>
                             <a href="<?php echo $url?>" target="_blank">
-                                <img style="width:50px;height:50px" src="<?php echo $_rets->getPhoto(0, 50,50)?>">
+                                <img style="width:50px;height:50px" src="<?php echo $item->data->photo_url?>">
                             </a>
                         </td>
-                        <td><a href="<?php echo $url?>" target="_blank"><?php echo $_rets->title()?></a></td>
-                        <td><?php echo $_render->get('list_price')['formatedValue']?></td>
-                        <td><?php echo $_rets->statusName()?></td>
+                        <td><a href="<?php echo $url?>" target="_blank"><?php echo $item->data->title?></a></td>
+                        <td>
+                            <?php echo $item->data->list_price['prefix'] ?? ''?>
+                            <?php echo $item->data->list_price['value']?>
+                            <?php echo $item->data->list_price['suffix'] ?? ''?>
+                        </td>
+                        <td><?php echo $item->data->status_name?></td>
                         <td><?php echo date('Y-m-d H:i', strtotime($item->created_at))?></td>
                         <td><a class="btn-remove" href="/rets/wishlist/delete/?id=<?php echo $item->id?>"><?php echo \WS::t('rets', 'Remove it')?></a></td>
                     </tr>

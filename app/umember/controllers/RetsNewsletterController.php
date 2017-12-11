@@ -6,6 +6,21 @@ use yii\data\ActiveDataProvider;
 
 class RetsNewsletterController extends \module\umember\Controller
 {
+    protected $areas = [];
+
+    public  function init()
+    {
+        $this->areas = [
+            'ma'=>tt('Massachusetts', '麻省州'),
+            'ny'=>tt('New York', '纽约'),
+            'ga'=>tt('Georgia', '佐治亚州'),
+            'il'=>tt('Illinois', '伊利诺斯州'),
+            'ca'=>tt('California', '加州')
+        ];
+
+        return parent::init();
+    }
+
     public function actionIndex()
     {
         $this->menuId = 'newsletter';
@@ -30,10 +45,10 @@ class RetsNewsletterController extends \module\umember\Controller
 
     public function actionUpdate($id)
     {
-        return $this->actionEdit($id);
+        return $this->actionEdit(null, $id);
     }
 
-    public function actionEdit($id=null)
+    public function actionEdit($area_id=null, $id=null)
     {
         $this->menuId = 'newsletter';
         
@@ -44,9 +59,13 @@ class RetsNewsletterController extends \module\umember\Controller
                     'id'=>$id,
                     'user_id'=>WS::$app->user->id
                 ])->one();
+            $area_id = $model->area_id;
         }
-        if(! $model)
+
+        if(! $model) {
             $model = new \common\customer\RetsNewsletter();
+            $model->area_id = $area_id;
+        }
 
         if(WS::$app->request->isPost) {
             $model->load(WS::$app->request->post());
@@ -61,7 +80,11 @@ class RetsNewsletterController extends \module\umember\Controller
             }
         }
 
-        return $this->render('edit', ['model'=>$model]);
+        return $this->render('edit', [
+            'model'=>$model,
+            'areaId' => $area_id,
+            'areas' => $this->areas
+        ]);
     }
 
     public function actionDelete($id)

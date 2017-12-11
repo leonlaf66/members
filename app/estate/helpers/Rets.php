@@ -9,7 +9,8 @@ class Rets extends \common\estate\helpers\Rets
     public static function getUrl($rets)
     {
         $typeName = $rets->prop_type == 'RN' ? 'lease' : 'purchase';
-        return WS::$app->houseBaseUrl."{$typeName}/{$rets->list_no}/";
+        $listNo = $rets->list_no ?? $rets->id;
+        return WS::$app->houseBaseUrl."{$typeName}/{$listNo}/";
     }
 
     public static function getModule()

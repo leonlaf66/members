@@ -48,10 +48,12 @@ echo yii\grid\GridView::widget([
                 $dataItems = $m->getDataItems();
                 $output = ['<table class="filters">'];
                 foreach ($dataItems as $label => $value) {
-                    $output[] = '<tr>';
-                    $output[] = "<td class=\"cell-label\">{$label}</td>";
-                    $output[] = "<td class=\"cell-value\">{$value}</td>";
-                    $output[] = '</tr>';
+                    if ($value && strlen($value) > 0) {
+                        $output[] = '<tr>';
+                        $output[] = "<td class=\"cell-label\">{$label}</td>";
+                        $output[] = "<td class=\"cell-value\">{$value}</td>";
+                        $output[] = '</tr>';
+                    }
                 }
                 $output[] = '</table>';
                 return implode('', $output);

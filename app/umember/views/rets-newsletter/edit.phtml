@@ -32,35 +32,48 @@ $this->params['breadcrumbs'][] = $this->title;
       ],
       ])?>
 
-    <?php echo $form->field($model, 'name', ['horizontalCssClasses'=>['wrapper'=>'col-sm-6']])?>
-
-    <?php echo $form->field($model, 'city', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
-        ->dropDownList(RetsNewsletter::cityOptions(), ['prompt'=>'', 'class'=>'form-control ex-select']) ?>
-
-    <?php echo $form->field($model, 'prop_type', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
-        ->dropDownList(RetsNewsletter::typeOptions(), ['prompt'=>'']) ?>
-
-    <?php echo $form->field($model, 'price_range', ['horizontalCssClasses'=>['wrapper' => 'col-sm-8']]) ?>
-
-    <?php echo $form->field($model, 'bed_rooms')
-        ->inline()
-        ->radioList(RetsNewsletter::bedOptions()) ?>
-    
-    <?php echo $form->field($model, 'bath_rooms')
-        ->inline()
-        ->radioList(RetsNewsletter::bathOptions()) ?>
-
-    <?php echo $form->field($model, 'notification_cycle')
-        ->inline()
-        ->radioList(RetsNewsletter::cycleOptions()) ?>
-
-    <div class="container-fluid">
-        <div class="row">
-            <button type="submit" class="btn"><?php _tt('Submit', '提交')?></button>
-            &nbsp;&nbsp;
-            <a href="/umember/rets-newsletter/" class="btn"><?php _tt('Cancel', '取消')?></a>
+    <?php if (!$model->area_id):?>
+        <h2 style="font-size:18px;margin-bottom:10px;"><?php echo tt('Plase choose area first blow', '请先选择区域')?></h2>
+        <ul style="margin-left:15px;">
+            <?php foreach ($areas as $id => $name):?>
+                <li style="padding:3px 0"><a href="/rets/newsletter/edit/?area_id=<?php echo $id?>"><?php echo $name?></a></lii>
+            <?php endforeach?>
+        </ul>
+    <?php else:?>
+        <div style="padding: 0 0 15px 15px;font-size: 24px;margin-bottom: 10px;">
+            <?php echo $areas[$model->area_id]?>
         </div>
-    </div>
+
+        <?php echo $form->field($model, 'name', ['horizontalCssClasses'=>['wrapper'=>'col-sm-6']])?>
+
+        <?php echo $form->field($model, 'city', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
+            ->dropDownList(RetsNewsletter::cityOptions($areaId), ['prompt'=>'', 'class'=>'form-control ex-select']) ?>
+
+        <?php echo $form->field($model, 'prop_type', ['horizontalCssClasses'=>['wrapper'=>'col-sm-3']])
+            ->dropDownList(RetsNewsletter::typeOptions(), ['prompt'=>'']) ?>
+
+        <?php echo $form->field($model, 'price_range', ['horizontalCssClasses'=>['wrapper' => 'col-sm-8']]) ?>
+
+        <?php echo $form->field($model, 'bed_rooms')
+            ->inline()
+            ->radioList(RetsNewsletter::bedOptions()) ?>
+
+        <?php echo $form->field($model, 'bath_rooms')
+            ->inline()
+            ->radioList(RetsNewsletter::bathOptions()) ?>
+
+        <?php echo $form->field($model, 'notification_cycle')
+            ->inline()
+            ->radioList(RetsNewsletter::cycleOptions()) ?>
+
+        <div class="container-fluid">
+            <div class="row">
+                <button type="submit" class="btn"><?php _tt('Submit', '提交')?></button>
+                &nbsp;&nbsp;
+                <a href="/umember/rets-newsletter/" class="btn"><?php _tt('Cancel', '取消')?></a>
+            </div>
+        </div>
+        <?php endif?>
 <?php ActiveForm::end()?>
 </div>
 
