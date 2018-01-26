@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php
                         $domain = domain();
                         $url = '';
-                        if ($domain === 'ma') {
+                        if ($item->area_id === 'ma') {
                             $url = RetsHelper::getUrl($item->getRets());
                         } else {
                             $rets = \common\listhub\estate\House::findOne($item->list_no);
