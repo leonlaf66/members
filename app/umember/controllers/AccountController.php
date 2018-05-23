@@ -71,7 +71,7 @@ class AccountController extends \module\umember\Controller
 
             $db->createCommand() // 更新user.open_id
                 ->update(
-                    'user',
+                    'member',
                     [
                         'open_id' => $openId
                     ],
@@ -96,6 +96,15 @@ class AccountController extends \module\umember\Controller
                         ->execute();
                 }
             }
+
+            // 停用掉原有微信帐号
+            $db->createCommand()
+                ->update('member', {
+                    'flags' => 1
+                }, 'open_id=:open_id and id<>:id', [
+                    ':id' => $userId
+                    ':open_id' => $openId
+                ])->execute();
         }
 
         WS::$app->session->setFlash('success', 'Your wechat has been binded!');
@@ -109,7 +118,7 @@ class AccountController extends \module\umember\Controller
         $userId = WS::$app->user->id;
 
         $db->createCommand() // 设定open_id为null即可
-            ->update('user', ['open_id' => null], 'id=:id', [':id' => $userId])
+            ->update('member', ['open_id' => null], 'id=:id', [':id' => $userId])
             ->execute();
 
         WS::$app->session->setFlash('success', 'Your wechat has been unbinded!');
