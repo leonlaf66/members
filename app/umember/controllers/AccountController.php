@@ -83,9 +83,9 @@ class AccountController extends \module\umember\Controller
 
             if ($userInfo = $wxadv->get_user_info($openId)) {
                 // 写入profile.name
-                if ((new \yii\db\Query())->from('user_profile')->where(['user_id' => $userId])->exists()) {
+                if ((new \yii\db\Query())->from('member_profile')->where(['user_id' => $userId])->exists()) {
                     $db->createCommand() // 更新name，仅更新name为null的
-                        ->update('user_profile', ['name' => $userInfo['nickname']], 'user_id=:id and name is null', [':id' => $userId])->execute();
+                        ->update('member_profile', ['name' => $userInfo['nickname']], 'user_id=:id and name is null', [':id' => $userId])->execute();
                 } else { // 不存在时创建
                     $db->createCommand()
                         ->insert([
