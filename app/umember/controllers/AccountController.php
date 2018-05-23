@@ -99,9 +99,9 @@ class AccountController extends \module\umember\Controller
 
             // 停用掉原有微信帐号
             $db->createCommand()
-                ->update('member', {
+                ->update('member', [
                     'flags' => 1
-                }, 'open_id=:open_id and id<>:id', [
+                ], 'open_id=:open_id and id<>:id', [
                     ':id' => $userId
                     ':open_id' => $openId
                 ])->execute();
