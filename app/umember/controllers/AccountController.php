@@ -71,12 +71,10 @@ class AccountController extends \module\umember\Controller
 
             $db->createCommand() // 更新user.open_id
                 ->update(
-                    'member',
-                    [
+                    'member', [
                         'open_id' => $openId
                     ],
-                    'id=:id',
-                    [
+                    'id=:id', [
                         ':id' => $userId
                     ]
                 )->execute();
