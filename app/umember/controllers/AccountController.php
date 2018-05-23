@@ -102,7 +102,7 @@ class AccountController extends \module\umember\Controller
                 ->update('member', [
                     'flags' => 1
                 ], 'open_id=:open_id and id<>:id', [
-                    ':id' => $userId
+                    ':id' => $userId,
                     ':open_id' => $openId
                 ])->execute();
         }
