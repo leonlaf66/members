@@ -61,7 +61,7 @@ class AccountController extends \module\umember\Controller
     }
 
     /*绑定微信帐号*/
-    public function actionBindWechat($code)
+    public function actionBindWechat($code = null)
     {
         $options = WS::$app->params['wechat'];
         $wxadv = new \common\wechat\WXAdv($options['appId'], $options['appSecret']);
