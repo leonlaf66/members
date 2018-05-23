@@ -16,6 +16,7 @@ return [
         '/bind-phone/' => 'umember/account/bind-phone',
         '/bind-wechat/' => 'umember/account/bind-wechat',
         '/unbind-wechat/' => 'umember/account/unbind-wechat',
-        '/bind-email-address' => 'umember/account/bind-email-address'
+        '/bind-email-address' => 'umember/account/bind-email-address',
+        '/logout/' => 'umember/account/logout'
     ]
 ];

@@ -49,6 +49,9 @@ $active = function($id) use ($c){
                     <li <?php $active('schedule')?>>
                         <a href="/rets/schedule/"><?php $t('Schedule')?></a>
                     </li>
+                    <li>
+                        <a href="/logout/"><?php _tt('Logout', '退出登陆')?></a>
+                    </li>
                     <!--
                     <li <?php $active('modify-password')?>>
                         <a href="/modify-password/"><?php _tt('Modify Password', '修改密码')?></a>

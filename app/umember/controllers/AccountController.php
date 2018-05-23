@@ -122,4 +122,9 @@ class AccountController extends \module\umember\Controller
         WS::$app->session->setFlash('success', 'Your wechat has been unbinded!');
         return $this->redirect(['/account/']);
     }
+
+    public function actionLogout()
+    {
+        return $this->redirect(\WS::$app->params['passport']['baseUrl'].'/logout/');
+    }
 }
