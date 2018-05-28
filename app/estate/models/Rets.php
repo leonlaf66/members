@@ -7,7 +7,7 @@ class Rets extends \yii\db\ActiveRecord
 
     public static function tableName()
     {
-        return 'house_data';
+        return 'house_data_v2';
     }
 
     public function isMls()
