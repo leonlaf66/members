@@ -32,6 +32,10 @@ return \yii\helpers\ArrayHelper::merge(get_fdn_etc('web'), [
                 ]
             ]
         ],
+        'graphql' => [
+            'class'=>'module\core\components\graphql\Client',
+            'appToken' => 'b2e476cb5ddcbf81c337218d5b5d43fa83bd6a8d4c9b7ba4ea047c70d22a828c'
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'AulhaJkw74KJHBBq1JobpnXv90jLd8ba',

@@ -8,19 +8,14 @@ class WishlistController extends \module\umember\Controller
     public function actionIndex($type='1')
     {
         $this->menuId = $type === '1' ? 'wishlist-rental' : 'wishlist-sell';
-
-        $wishlistQuery = \common\customer\RetsFavorite::findByUserId(WS::$app->user->id);
-        if($type == 1) {
-            $wishlistQuery->andWhere(['property_type'=>'RN']);
-        }
-        else {
-            $wishlistQuery->andWhere("property_type<>'RN'");
-        }
-        $wishlist = $wishlistQuery->all();
+        $results = WS::$app->graphql->request('house-favorites', [
+            'is_rental' => $type === '1'
+        ])->find_favorite_houses->items;
 
         return $this->render('index', [
-            'typeName'=>$type == 1 ? 'Rental' : 'Buy & Sell',
-            'wishlist'=>$wishlist
+            'is_rental' => $type == 1,
+            'typeName' => $type == 1 ? 'Rental' : 'Buy & Sell',
+            'wishlist' => $results
         ]);
     }
 

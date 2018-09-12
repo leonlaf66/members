@@ -1,0 +1,10 @@
+query find_house_newsletter{
+  result: find_house_newsletter(first:100) {
+    items {
+      id
+      name
+      data
+      created_at
+    }
+  }
+}

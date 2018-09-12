@@ -1,0 +1,16 @@
+query find_member_favorite_houses($is_rental:Boolean = false){
+  find_favorite_houses(rental:$is_rental, first:100) {
+    items {
+      id
+      house {
+        id
+        nm
+        photo(w:300, h:300)
+        price
+        status
+        prop
+      }
+      created_at
+    }
+  }
+}

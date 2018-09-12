@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use module\estate\helpers\Rets as RetsHelper;
+use module\estate\helpers\FieldFilter;
   
 $this->title = tt('My Schedule', '我的预约');  
 $this->params['breadcrumbs'][] = $this->title;  
@@ -19,20 +20,10 @@ echo yii\grid\GridView::widget([
         'item_image'=>[
             'header'=>tt('Item', '项目'),
             'value'=>function($m){
-                if ($m->area_id === 'ma') {
-                    if($rets = $m->getRets()) {
-                        $imgSrc = $rets->getPhoto(0, 60, 50) . '';
-                        $linkUrl  = RetsHelper::getUrl($rets);
-                        return "<a href=\"{$linkUrl}\" class=\"_blank\"><img src=\"{$imgSrc}\" style=\"width:60px;height:50px;\"/></a>";
-                    }
-                } else {
-                    $rets = \common\listhub\estate\House::findOne($m->list_no);
-                    $imgSrc = $rets->getPhoto(0)['url'];
-                    $linkUrl  = RetsHelper::getUrl($rets);
-                    return "<a href=\"{$linkUrl}\" class=\"_blank\"><img src=\"{$imgSrc}\" style=\"width:60px;height:50px;\"/></a>";
-                }
+                $imgSrc = $m->house->photo;
+                $linkUrl = FieldFilter::url($m->house->id, $m->house->prop!== 'RN');
 
-                return '';
+                return "<a href=\"{$linkUrl}\" class=\"_blank\"><img src=\"{$imgSrc}\" style=\"width:60px;height:50px;\"/></a>";
             },
             'headerOptions'=>[
               'width'=>'50'
@@ -41,21 +32,10 @@ echo yii\grid\GridView::widget([
         ],
         'item_name'=>[
             'value'=>function($m){
-                if ($m->area_id === 'ma') {
-                    if($rets = $m->getRets()) {
-                        $linkUrl = RetsHelper::getUrl($rets);
-                        $name = $m->getRetsName();
-                        return "<a class=\"_blank\" href=\"{$linkUrl}\">{$name}</a>";
-                    }
-                } else {
-                    $rets = \common\listhub\estate\House::findOne($m->list_no);
-                    $linkUrl = RetsHelper::getUrl($rets);
-                    $name = $rets->title();
-                    return "<a class=\"_blank\" href=\"{$linkUrl}\">{$name}</a>";
-                    return '';
-                }
+                $linkUrl = FieldFilter::url($m->house->id, $m->house->prop!== 'RN');
+                $name = $m->house->nm;
 
-                return '';
+                return "<a class=\"_blank\" href=\"{$linkUrl}\">{$name}</a>";
             },
             'headerOptions'=>[
               'width'=>'320'
@@ -63,21 +43,25 @@ echo yii\grid\GridView::widget([
             'format'=>'html'
         ],
         'date_start'=>[
+            'header'=>tt('Start Time', '开始时间'),
             'attribute'=>'date_start',
             'value'=>function($m) {
                 return date('Y-m-d H:00', strtotime($m->date_start));
             }
         ],
         'date_end'=>[
+            'header'=>tt('End Time', '结束时间'),
             'attribute'=>'date_end',
             'value'=>function($m) {
                 return date('Y-m-d H:00', strtotime($m->date_end));
             }
         ],
         'status'=>[
+            'header'=>tt('Status', '确认状态'),
             'attribute'=>'status',
             'value'=>function($m) {
-                return "<span class=\"badge\">{$m->getStatusName()}</span>";
+                $statusName = tt($m->is_confirmed ? ['Confirmed', '已确认'] : ['Not Confirmed', '未确认']);
+                return "<span class=\"badge\">{$statusName}</span>";
             },
             'format'=>'html'
         ],

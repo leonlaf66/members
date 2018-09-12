@@ -1,0 +1,16 @@
+query house_tours {
+  result: find_house_tour(first:100) {
+    items {
+      id
+      house {
+        id
+        nm
+        photo(w:300,h:300)
+        prop
+      }
+      date_start
+      date_end
+      is_confirmed
+    }
+  }
+}
